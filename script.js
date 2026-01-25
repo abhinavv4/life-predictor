@@ -26,9 +26,14 @@ const fields = ["food","activity","stress","sleep","illness","habits","screen","
   }
 
   const dob = new Date(document.getElementById("dob").value);
-  const avg = Math.floor((min + max) / 2);
-  let deathDate = new Date(dob);
-  deathDate.setFullYear(dob.getFullYear() + avg);
+ const randomLife = Math.floor(Math.random() * (max - min + 1)) + min;
+
+let deathDate = new Date(dob);
+deathDate.setFullYear(dob.getFullYear() + randomLife);
+
+// Add random months and days for realism
+deathDate.setMonth(Math.floor(Math.random() * 12));
+deathDate.setDate(Math.floor(Math.random() * 28) + 1);
 
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
