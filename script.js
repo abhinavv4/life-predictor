@@ -42,28 +42,9 @@ deathDate.setDate(Math.floor(Math.random() * 28) + 1);
  let deathTitle = "☠️ GOING TO…";
   let deathMessage = "";
 
-  if (deathMode === "normal") {
-    deathMessage = "💀 " + deathDate.toLocaleDateString('en-IN', options);
-  } 
-  else if (deathMode === "immortal") {
-    deathTitle = "🧬 Immortality Status";
-    deathMessage = "You are IMMORTAL. Death fears you.";
-  } 
-  else {
-    const chaos = {
-      croissant: "Choked by legendary croissant 🥐",
-      walmart: "Suffocated by Walmart bag 🛍️",
-      helicopter: "Taken away by military helicopter 🚁",
-      mcqueen: "Run over by Lightning McQueen 🏎️",
-      donut: "Sugar overdose from donuts 🍩",
-      chicken: "Attacked by angry chickens 🍗",
-      spotify: "Killed by emotional Spotify playlist 🎧",
-      lightning: "Struck by anime-level lightning ⚡"
-    };
-    deathMessage = chaos[deathMode];
-  }
-
-  document.getElementById("result").style.display = "block";
+  if(deathMode === "normal") {
+    deathMessage = "💀 " + deathDate.toLocaleDateString('en-IN', options);
+ } document.getElementById("result").style.display = "block";
   document.getElementById("result").innerHTML = `
     <h2>🧠 Final Analysis</h2>
     <p><b>Lifestyle Score:</b> ${total} / 35</p>
