@@ -22,8 +22,14 @@
         <option value="male">Male</option>
         <option value="female">Female</option>
         <option value="other">Other</option>
-      </select>
-   
+      </select>
+
+      <label>Height (in cm)</label>
+      <input type="number" id="height" min="50" max="250" placeholder="e.g., 170" required>
+
+      <label>Weight (in kg)</label>
+      <input type="number" id="weight" min="20" max="300" placeholder="e.g., 70" required>
+
       <label>Food Habit</label>
       <select id="food">
         <option value="5">Very Healthy</option>
@@ -43,14 +49,13 @@
       </select>
 
       <label>Gooning 💦 </label>
-<select id="fap">
-  <option value="5">Rare / Never</option>
-  <option value="4">Once a week</option>
-  <option value="3">2–3 times a week</option>
-  <option value="2">Once daily</option>
-  <option value="1">4+ times daily 💀</option>
-</select>
-
+      <select id="fap">
+        <option value="5">Rare / Never</option>
+        <option value="4">Once a week</option>
+        <option value="3">2–3 times a week</option>
+        <option value="2">Once daily</option>
+        <option value="1">4+ times daily 💀</option>
+      </select>
 
       <label>Stress Level</label>
       <select id="stress">
@@ -65,9 +70,22 @@
       <select id="sleep">
         <option value="5">7–9 hrs</option>
         <option value="4">6–7 hrs</option>
+        <option value="4">9–10 hrs</option>
         <option value="3">5–6 hrs</option>
+        <option value="3">10–11 hrs</option>
         <option value="2">4–5 hrs</option>
+        <option value="2">11–13 hrs</option>
         <option value="1">Below 4 hrs</option>
+        <option value="1">13+ hrs</option>
+      </select>
+
+      <label>Mental Health Status</label>
+      <select id="mental">
+        <option value="5">Excellent (No issues)</option>
+        <option value="4">Good (Occasional blues)</option>
+        <option value="3">Moderate (Manageable anxiety/depression)</option>
+        <option value="2">Poor (Frequent issues)</option>
+        <option value="1">Severe (Needs help 💀)</option>
       </select>
 
       <label>Chronic Illness</label>
@@ -77,11 +95,34 @@
         <option value="1">Severe</option>
       </select>
 
-      <label>Smoking / Alcohol</label>
-      <select id="habits">
+      <label>Smoking</label>
+      <select id="smoking">
         <option value="5">Never</option>
         <option value="3">Occasionally</option>
         <option value="1">Regular</option>
+      </select>
+
+      <label>Alcohol Consumption</label>
+      <select id="alcohol">
+        <option value="5">Never</option>
+        <option value="3">Occasionally</option>
+        <option value="1">Regular</option>
+      </select>
+
+      <label>Drug Use</label>
+      <select id="drugs">
+        <option value="5">None</option>
+        <option value="3">Mild</option>
+        <option value="1">Severe</option>
+      </select>
+
+      <label>Daily Water Intake</label>
+      <select id="water">
+        <option value="5">3+ liters</option>
+        <option value="4">2–3 liters</option>
+        <option value="3">1–2 liters</option>
+        <option value="2">0.5–1 liter</option>
+        <option value="1">Below 0.5 liter</option>
       </select>
 
       <label>Daily Screen Time</label>
