@@ -33,41 +33,44 @@ document.getElementById("lifestyleForm").addEventListener("submit", function(e) 
 
   switch (mentalValue) {
     case 5:
-      mentalTips = "Your mental health is in excellent shape! To maintain it, continue engaging in activities that bring you joy, practice gratitude daily, maintain strong social connections, and incorporate mindfulness or meditation into your routine. Regular physical activity and a balanced diet also support long-term mental well-being.";
+      mentalTips = "Your mind is in great shape! Keep it up by doing things you love, staying thankful, hanging out with friends, and trying a bit of meditation. Exercise and good food help too.";
       break;
     case 4:
-      mentalTips = "Occasional blues are normal and often temporary. To manage them, try journaling your thoughts, practicing deep breathing exercises or progressive muscle relaxation, spending time in nature, or talking to a trusted friend or family member. If these feelings become more frequent, consider tracking patterns and seeking early support to prevent escalation.";
+      mentalTips = "Everyone gets down sometimes—it's normal. Write down your thoughts, take deep breaths, go for a walk outside, or chat with a buddy. If it happens more, keep an eye on it and get help early if needed.";
       break;
     case 3:
-      mentalTips = "Manageable anxiety or depression can be addressed with lifestyle changes. Incorporate daily practices like meditation (try apps like Headspace or Calm), regular exercise such as walking or yoga, maintaining a consistent sleep schedule, and eating nutrient-rich foods. Building a support network and setting small, achievable goals can help. If symptoms persist, consult a mental health professional for personalized strategies.";
+      mentalTips = "You can handle this anxiety or low mood with some changes. Try meditating (apps like Headspace are easy), walking or yoga daily, sticking to a sleep routine, and eating well. Talk to friends and set small goals. If it sticks around, see a pro for tips.";
       break;
     case 2:
-      mentalTips = "Frequent mental health issues signal the need for proactive intervention. Prioritize self-care by limiting stressors, practicing cognitive behavioral techniques (like challenging negative thoughts), and engaging in hobbies. It's important to seek professional help—consider therapy or counseling. In India, you can reach out to Tele-MANAS at 14416 or 1-800-891-4416 for 24/7 free support, or KIRAN at 1800-599-0019 for mental health rehabilitation.";
+      mentalTips = "If issues pop up a lot, it's time to take action. Cut down on stress, challenge bad thoughts, and do fun stuff. Get help from a therapist—it's a smart move. In India, call Tele-MANAS at 14416 or 1-800-891-4416 anytime, or KIRAN at 1800-599-0019 for support.";
       break;
     case 1:
-      mentalTips = "Severe mental health concerns require immediate professional attention. You're not alone, and help is available. Please reach out to a trusted person or a helpline right away. In India, contact Tele-MANAS (14416 or 1-800-891-4416) for 24/7 support, KIRAN (1800-599-0019) for crisis intervention, Vandrevala Foundation (+91 9999 666 555) for confidential counseling, or Jeevan Aastha Helpline (1800 233 3330) for suicide prevention. Consider visiting a local mental health clinic or hospital if possible. Taking this step is a sign of strength.";
+      mentalTips = "This is tough, but help is out there—you're not alone. Talk to someone you trust or call a helpline now. In India, try Tele-MANAS (14416 or 1-800-891-4416) for round-the-clock chat, KIRAN (1800-599-0019) for emergencies, Vandrevala Foundation (+91 9999 666 555) for private talks, or Jeevan Aastha (1800 233 3330) to prevent bad thoughts. Seeing a doctor nearby is a strong step.";
       break;
   }
 
-  let quality = "", min = 0, max = 0, tips = "";
+  let quality = "", min = 0, max = 0, generalTips = "";
 
   if (total >= 55) {
     quality = "🔥 Excellent";
     min = 85; max = 95;
-    tips = "Elite discipline. Maintain consistency. Keep nurturing your mental health with positive habits.";
+    generalTips = "You're killing it with great habits all around—food, activity, low stress, solid sleep, and more. Keep this up for a long, happy life. Maybe add some new challenges like trying a new sport or hobby to stay fresh.";
   } else if (total >= 45) {
     quality = "💪 Good";
     min = 75; max = 85;
-    tips = "Improve sleep and training routine. Consider mindfulness for better mental health.";
+    generalTips = "Solid base, but room to level up. Focus on better sleep, more consistent workouts, healthier eats, cutting screen time, and managing stress or habits like smoking/drinking. Small changes add up big time.";
   } else if (total >= 30) {
     quality = "⚠️ Average";
     min = 65; max = 75;
-    tips = "Fix diet, stress, and sleep ASAP. Seek support if mental health is slipping.";
+    generalTips = "Things are okay, but let's improve. Prioritize fixing your diet, getting more active, reducing stress and screen time, improving sleep, and cutting back on any bad habits. Track your water and self-control too—start with one thing at a time.";
   } else {
     quality = "🚨 Poor";
     min = 50; max = 65;
-    tips = "You're self-destructing. Wake up. Prioritize mental health interventions.";
+    generalTips = "Time for a reset—your habits in food, activity, stress, sleep, screen time, and more need work to avoid issues. Start small: drink more water, walk daily, cut junk, and seek support for mental stuff or addictions. You've got this, one step at a time.";
   }
+
+  // Combine tips into one conclusion
+  const combinedAdvice = `${generalTips} On the mental side: ${mentalTips} Overall, aim for balance across all areas—your body and mind will thank you. Remember, progress over perfection!`;
 
   const dob = new Date(document.getElementById("dob").value);
   const randomLife = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -94,7 +97,6 @@ document.getElementById("lifestyleForm").addEventListener("submit", function(e) 
     <p><b>Mental Health Level:</b> ${document.getElementById("mental").selectedOptions[0].text}</p>
     <p><b>Estimated Lifespan:</b> ${min} – ${max} years</p>
     <p><b>${deathTitle}:</b> ${deathMessage}</p>
-    <p><b>Friendly advise:</b> ${tips}</p>
-    <p><b>Mental Health Tips:</b> ${mentalTips}</p>
+    <p><b>Conclusion & Friendly Advice:</b> ${combinedAdvice}</p>
   `;
 });
