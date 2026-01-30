@@ -90,11 +90,11 @@ document.getElementById("lifestyleForm").addEventListener("submit", function(e) 
     <p><b>Lifestyle Score:</b> ${total} / 60</p>
     <p><b>Quality:</b> ${quality}</p>
     <p><b>BMI:</b> \( {bmi.toFixed(2)} ( \){bmiCategory})</p>
-    <p><b>Self-Control Level:</b> ${document.getElementById("fap").selectedOptions[0].text}</p>
+    <p><b>self-Control Level:</b> ${document.getElementById("fap").selectedOptions[0].text}</p>
     <p><b>Mental Health Level:</b> ${document.getElementById("mental").selectedOptions[0].text}</p>
     <p><b>Estimated Lifespan:</b> ${min} – ${max} years</p>
     <p><b>${deathTitle}:</b> ${deathMessage}</p>
-    <p><b>Reality Check:</b> ${tips}</p>
-    <p><b>Detailed Mental Health Tips:</b> ${mentalTips}</p>
+    <p><b>Friendly advise:</b> ${tips}</p>
+    <p><b>Mental Health Tips:</b> ${mentalTips}</p>
   `;
 });
