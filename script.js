@@ -1,4 +1,4 @@
-document.getElementById("lifestyleForm").addEventListener("submit", function(e) {
+Document.getElementById("lifestyleForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
   // --- 1. GET INPUTS ---
@@ -18,12 +18,12 @@ document.getElementById("lifestyleForm").addEventListener("submit", function(e) 
   const bmi = weight / Math.pow(height / 100, 2);
   let bmiCategory = "";
   let bmiScore = 0;
-  let bmiAdvice = ""; // <--- NEW VARIABLE FOR SPECIFIC ADVICE
+  let bmiAdvice = ""; 
 
   if (bmi < 18.5) {
     bmiCategory = "Underweight";
     bmiScore = 3;
-    bmiAdvice = "You need to fuel up! Focus on calorie-dense, healthy foods and strength training to build mass.";
+    bmiAdvice = "You need to fuel up! Focus on calorie-dense, healthy foods and strength training.";
   } else if (bmi < 25) {
     bmiCategory = "Normal Weight";
     bmiScore = 5;
@@ -39,7 +39,7 @@ document.getElementById("lifestyleForm").addEventListener("submit", function(e) 
   } else {
     bmiCategory = "Severely Obese";
     bmiScore = 1;
-    bmiAdvice = "Critical: Please consult a doctor for a weight management plan. Your health is at risk.";
+    bmiAdvice = "Critical: Please consult a doctor. Your body is under extreme stress.";
   }
 
   // --- 3. TOTAL SCORE CALCULATION ---
@@ -48,7 +48,7 @@ document.getElementById("lifestyleForm").addEventListener("submit", function(e) 
     "food", "activity", "stress", "sleep", "illness", 
     "screen", "fap", "mental", "smoking", "alcohol", "drugs", "water"
   ];
-  
+
   fields.forEach(id => {
     const el = document.getElementById(id);
     if (el && el.value) total += parseInt(el.value, 10);
@@ -62,7 +62,7 @@ document.getElementById("lifestyleForm").addEventListener("submit", function(e) 
 
   const mentalValue = parseInt(document.getElementById("mental")?.value || 0, 10);
   let mentalTips = "";
-
+  // (Mental switch case remains the same)
   switch (mentalValue) {
     case 5: mentalTips = "Mental state is strong."; break;
     case 4: mentalTips = "Stay socially connected."; break;
@@ -72,25 +72,34 @@ document.getElementById("lifestyleForm").addEventListener("submit", function(e) 
     default: mentalTips = "Take it one day at a time.";
   }
 
-  // Calculate General Quality
+  // --- [UPDATED] DRASTIC IMPACT LOGIC ---
   let quality = "", min = 0, max = 0, generalTips = "";
 
-  if (total >= 55) {
-    quality = "🔥 Excellent";
-    min = 85; max = 100;
-    generalTips = "Overall habits are legendary.";
-  } else if (total >= 45) {
+  if (total >= 58) {
+    quality = "🔥 Legendary";
+    min = 90; max = 105;
+    generalTips = "You are optimizing human potential.";
+  } else if (total >= 48) {
     quality = "💪 Good";
-    min = 75; max = 85;
+    min = 78; max = 89;
     generalTips = "Solid lifestyle foundation.";
-  } else if (total >= 30) {
-    quality = "⚠️ Average";
-    min = 65; max = 75;
-    generalTips = "Cut the bad habits to improve.";
+  } else if (total >= 35) {
+    quality = "⚠️ Risky"; // Changed from 'Average'
+    min = 55; max = 75; // Lowered significantly
+    generalTips = "You are gambling with your health. Changes needed.";
   } else {
-    quality = "🚨 Poor";
-    min = 50; max = 65;
-    generalTips = "Immediate lifestyle reset needed.";
+    // DRASTIC TIER FOR LOW SCORES
+    quality = "🚨 CRITICAL FAILURE";
+    min = 35; max = 54; // Brutally low range for shock value
+    generalTips = "Your lifestyle is a ticking time bomb. Immediate intervention required.";
+  }
+
+  // [NEW] PENALTY FOR SEVERE OBESITY
+  // If Severely Obese, hard cap life expectancy regardless of other habits
+  if (bmiScore === 1) {
+      max = Math.min(max, 50); 
+      min = Math.min(min, 40);
+      generalTips += " (Obesity is drastically capping your timeline)";
   }
 
   // --- 5. DEATH DATE LOGIC ---
@@ -101,8 +110,11 @@ document.getElementById("lifestyleForm").addEventListener("submit", function(e) 
   deathDate.setDate(deathDate.getDate() + Math.floor(Math.random() * 365));
 
   const today = new Date();
+  
+  // If the calculated death date is in the past, it means their lifestyle is so bad 
+  // they statistically shouldn't be alive.
   let deathMessage = (deathDate < today) 
-    ? "👻 Statistical Anomaly (You beat the odds!)" 
+    ? "💀 You are living on borrowed time. (Statistically Deceased)" 
     : "💀 " + deathDate.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
 
   // --- 6. RENDER RESULT ---
@@ -118,9 +130,9 @@ document.getElementById("lifestyleForm").addEventListener("submit", function(e) 
         <p><b>Est. Lifespan:</b> ${min} – ${max} years</p>
     </div>
     <hr style="margin: 15px 0;">
-    <p style="color: #d9534f; font-weight: bold;">☠️ GOING TO... ${deathMessage}</p>
+    <p style="color: #d9534f; font-weight: bold; font-size: 1.1em;">☠️ GOING TO... ${deathMessage}</p>
     
-    <div style="margin-top:15px; padding:15px; background:rgba(0,0,0,0.05); border-left: 5px solid #007bff; border-radius:4px;">
+    <div style="margin-top:15px; padding:15px; background:rgba(0,0,0,0.05); border-left: 5px solid #d9534f; border-radius:4px;">
       <b>💡 Personalized Advice:</b>
       <ul style="margin: 10px 0 0 20px; padding: 0;">
         <li><b>Body:</b> ${bmiAdvice}</li>
