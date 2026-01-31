@@ -1,143 +1,138 @@
 document.getElementById("lifestyleForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
+  // 1. Hide previous results & show loading
+  const resultDiv = document.getElementById("result");
+  const loadingDiv = document.getElementById("loading");
+  const btn = document.getElementById("analyzeBtn");
+  
+  resultDiv.style.display = "none";
+  loadingDiv.style.display = "block";
+  btn.disabled = true;
+
+  // Fake processing delay (1.5 seconds)
+  setTimeout(() => {
+    calculateResults();
+    loadingDiv.style.display = "none";
+    resultDiv.style.display = "block";
+    btn.disabled = false;
+    resultDiv.scrollIntoView({ behavior: 'smooth' });
+  }, 1500);
+});
+
+function calculateResults() {
   // --- 1. GET INPUTS ---
-  const heightInput = document.getElementById("height");
-  const weightInput = document.getElementById("weight");
-  const dobInput = document.getElementById("dob");
+  const height = parseFloat(document.getElementById("height").value);
+  const weight = parseFloat(document.getElementById("weight").value);
+  const dobInput = document.getElementById("dob").value;
+  const gender = document.getElementById("gender").value;
 
-  const height = parseFloat(heightInput.value);
-  const weight = parseFloat(weightInput.value);
+  if (!height || !weight || !dobInput) return; // Should be caught by HTML 'required'
 
-  if (!height || !weight || height <= 0 || weight <= 0 || !dobInput.value) {
-    alert("Please enter valid Date of Birth, Height, and Weight!"); 
-    return;
-  }
-
-  // --- 2. BMI CALCULATION & ADVICE ---
+  // --- 2. BMI CALCULATION ---
   const bmi = weight / Math.pow(height / 100, 2);
-  let bmiCategory = "";
-  let bmiScore = 0;
-  let bmiAdvice = ""; 
+  let bmiCategory = "", bmiScore = 0, bmiAdvice = "";
 
   if (bmi < 18.5) {
     bmiCategory = "Underweight";
     bmiScore = 3;
-    bmiAdvice = "You need to fuel up! Focus on calorie-dense, healthy foods and strength training.";
+    bmiAdvice = "You need mass! Focus on calorie surplus and strength training.";
   } else if (bmi < 25) {
-    bmiCategory = "Normal Weight";
+    bmiCategory = "Normal";
     bmiScore = 5;
-    bmiAdvice = "Your weight is optimal. Keep your current activity level to maintain this balance.";
+    bmiAdvice = "Perfect weight. Maintain this ratio.";
   } else if (bmi < 30) {
     bmiCategory = "Overweight";
     bmiScore = 3;
-    bmiAdvice = "Time to burn some fat! Increase your cardio intensity and cut down on processed sugars.";
-  } else if (bmi < 35) {
-    bmiCategory = "Obese";
-    bmiScore = 2;
-    bmiAdvice = "Health Alert: Prioritize fat loss immediately. Combine daily exercise with a strict diet plan.";
+    bmiAdvice = "Cut the sugar. Increase cardio intensity.";
   } else {
-    bmiCategory = "Severely Obese";
+    bmiCategory = "Obese";
     bmiScore = 1;
-    bmiAdvice = "Critical: Please consult a doctor. Your body is under extreme stress.";
+    bmiAdvice = "Critical: Immediate lifestyle intervention needed.";
   }
 
-  // --- 3. TOTAL SCORE CALCULATION ---
+  // --- 3. TOTAL SCORE ---
   let total = bmiScore;
-  const fields = [
-    "food", "activity", "stress", "sleep", "illness", 
-    "screen", "fap", "mental", "smoking", "alcohol", "drugs", "water"
-  ];
-
+  // Fields to sum up
+  const fields = ["food", "activity", "stress", "sleep", "screen", "fap", "mental", "smoking", "alcohol"];
+  
   fields.forEach(id => {
     const el = document.getElementById(id);
-    if (el && el.value) total += parseInt(el.value, 10);
+    if (el) total += parseInt(el.value, 10);
   });
-
-  // --- 4. MENTAL & GENERAL ADVICE ---
-  const getSelectText = (id) => {
-    const el = document.getElementById(id);
-    return (el && el.selectedOptions.length > 0) ? el.selectedOptions[0].text : "Unknown";
-  };
-
-  const mentalValue = parseInt(document.getElementById("mental")?.value || 0, 10);
-  let mentalTips = "";
   
-  switch (mentalValue) {
-    case 5: mentalTips = "Mental state is strong."; break;
-    case 4: mentalTips = "Stay socially connected."; break;
-    case 3: mentalTips = "Try meditation for stress."; break;
-    case 2: mentalTips = "Consider talking to a therapist."; break;
-    case 1: mentalTips = "Seek professional support."; break;
-    default: mentalTips = "Take it one day at a time.";
-  }
-
-  // --- [UPDATED] DRASTIC IMPACT LOGIC ---
-  let quality = "", min = 0, max = 0, generalTips = "";
-
-  if (total >= 58) {
-    quality = "🔥 Legendary";
-    min = 90; max = 105;
-    generalTips = "You are optimizing human potential.";
-  } else if (total >= 48) {
-    quality = "💪 Good";
-    min = 78; max = 89;
-    generalTips = "Solid lifestyle foundation.";
-  } else if (total >= 35) {
-    quality = "⚠️ Risky"; 
-    min = 55; max = 75; 
-    generalTips = "You are gambling with your health. Changes needed.";
+  // Normalize Max Score (Roughly 9 fields * 5 + BMI 5 = 50)
+  // Adjusted thresholds based on 50 max
+  
+  // --- 4. PREDICTION LOGIC ---
+  let quality = "", minAge = 0, maxAge = 0, generalTips = "";
+  
+  if (total >= 42) {
+    quality = "🔥 Legendary (GigaChad)";
+    minAge = 85; maxAge = 100;
+    generalTips = "You are operating at peak efficiency.";
+  } else if (total >= 32) {
+    quality = "✅ Solid Human";
+    minAge = 75; maxAge = 88;
+    generalTips = "Good foundation, but don't get complacent.";
+  } else if (total >= 22) {
+    quality = "⚠️ NPC Status";
+    minAge = 60; maxAge = 75;
+    generalTips = "You are surviving, not thriving. Fix your habits.";
   } else {
-    // DRASTIC TIER FOR LOW SCORES
-    quality = "🚨 CRITICAL FAILURE";
-    min = 35; max = 54; 
-    generalTips = "Your lifestyle is a ticking time bomb. Immediate intervention required.";
+    quality = "🚨 TERMINAL VELOCITY";
+    minAge = 40; maxAge = 60;
+    generalTips = "Your lifestyle is actively trying to kill you.";
   }
 
-  // [NEW] PENALTY FOR SEVERE OBESITY
-  if (bmiScore === 1) {
-      max = Math.min(max, 50); 
-      min = Math.min(min, 40);
-      generalTips += " (Obesity is drastically capping your timeline)";
+  // --- 5. GENDER MODIFIER ---
+  // Statistically, females live longer.
+  if (gender === "female") {
+    maxAge += 4;
+    minAge += 2;
   }
 
-  // --- 5. DEATH DATE LOGIC ---
-  const dob = new Date(dobInput.value);
-  const randomLife = Math.floor(Math.random() * (max - min + 1)) + min;
+  // --- 6. DATE OF DEATH CALCULATION ---
+  const dob = new Date(dobInput);
+  const randomLifeSpan = Math.floor(Math.random() * (maxAge - minAge + 1)) + minAge;
+  
   let deathDate = new Date(dob);
-  deathDate.setFullYear(dob.getFullYear() + randomLife);
+  deathDate.setFullYear(dob.getFullYear() + randomLifeSpan);
+  
+  // Add some randomness to the day/month
   deathDate.setDate(deathDate.getDate() + Math.floor(Math.random() * 365));
 
-  const today = new Date();
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const deathString = deathDate.toLocaleDateString('en-IN', options);
   
-  let deathMessage = (deathDate < today) 
-    ? "💀 You are living on borrowed time. (Statistically Deceased)" 
-    : "💀 " + deathDate.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+  // Check if they are already "dead" based on logic
+  const today = new Date();
+  let footerMsg = (deathDate < today) 
+    ? "💀 ERROR: You should be dead already. Living on borrowed time."
+    : `🪦 Estimated Checkout: ${deathString} (Age: ${randomLifeSpan})`;
 
-  // --- 6. RENDER RESULT ---
-  const resultDiv = document.getElementById("result");
-  resultDiv.style.display = "block";
-  resultDiv.innerHTML = `
-    <h2>🧠 Final Analysis</h2>
-    <div class="result-grid">
-        <p><b>Lifestyle Score:</b> ${total} / 65</p>
-        <p><b>Quality:</b> ${quality}</p>
-        <p><b>BMI:</b> ${bmi.toFixed(2)} (${bmiCategory})</p>
-        <p><b>Self-Control:</b> ${getSelectText("fap")}</p>
-        <p><b>Est. Lifespan:</b> ${min} – ${max} years</p>
+  // --- 7. RENDER ---
+  const mentalText = document.getElementById("mental").options[document.getElementById("mental").selectedIndex].text;
+  
+  document.getElementById("result").innerHTML = `
+    <h2>📊 Final Analysis</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+        <div><b>Score:</b> ${total} / 50</div>
+        <div><b>Rank:</b> ${quality}</div>
+        <div><b>BMI:</b> ${bmi.toFixed(1)} (${bmiCategory})</div>
+        <div><b>Mind:</b> ${mentalText}</div>
     </div>
-    <hr style="margin: 15px 0;">
-    <p style="color: #d9534f; font-weight: bold; font-size: 1.1em;">☠️ GOING TO... ${deathMessage}</p>
     
-    <div style="margin-top:15px; padding:15px; background:rgba(0,0,0,0.05); border-left: 5px solid #d9534f; border-radius:4px;">
-      <b>💡 Personalized Advice:</b>
-      <ul style="margin: 10px 0 0 20px; padding: 0;">
-        <li><b>Body:</b> ${bmiAdvice}</li>
-        <li><b>Habits:</b> ${generalTips}</li>
-        <li><b>Mind:</b> ${mentalTips}</li>
+    <div style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+      <b>💡 Advice:</b>
+      <ul style="margin: 5px 0 0 15px; padding: 0; font-size: 0.95em; color: #ccc;">
+        <li>${bmiAdvice}</li>
+        <li>${generalTips}</li>
       </ul>
     </div>
-  `;
 
-  resultDiv.scrollIntoView({ behavior: 'smooth' });
-});
+    <div style="margin-top: 20px; text-align: center; color: #ff4d4d; font-weight: bold; font-size: 1.1em; border-top: 1px solid #444; padding-top: 15px;">
+      ${footerMsg}
+    </div>
+  `;
+}
