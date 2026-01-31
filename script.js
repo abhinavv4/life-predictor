@@ -1,4 +1,4 @@
-Document.getElementById("lifestyleForm").addEventListener("submit", function(e) {
+document.getElementById("lifestyleForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
   // --- 1. GET INPUTS ---
@@ -62,7 +62,7 @@ Document.getElementById("lifestyleForm").addEventListener("submit", function(e) 
 
   const mentalValue = parseInt(document.getElementById("mental")?.value || 0, 10);
   let mentalTips = "";
-  // (Mental switch case remains the same)
+  
   switch (mentalValue) {
     case 5: mentalTips = "Mental state is strong."; break;
     case 4: mentalTips = "Stay socially connected."; break;
@@ -84,18 +84,17 @@ Document.getElementById("lifestyleForm").addEventListener("submit", function(e) 
     min = 78; max = 89;
     generalTips = "Solid lifestyle foundation.";
   } else if (total >= 35) {
-    quality = "⚠️ Risky"; // Changed from 'Average'
-    min = 55; max = 75; // Lowered significantly
+    quality = "⚠️ Risky"; 
+    min = 55; max = 75; 
     generalTips = "You are gambling with your health. Changes needed.";
   } else {
     // DRASTIC TIER FOR LOW SCORES
     quality = "🚨 CRITICAL FAILURE";
-    min = 35; max = 54; // Brutally low range for shock value
+    min = 35; max = 54; 
     generalTips = "Your lifestyle is a ticking time bomb. Immediate intervention required.";
   }
 
   // [NEW] PENALTY FOR SEVERE OBESITY
-  // If Severely Obese, hard cap life expectancy regardless of other habits
   if (bmiScore === 1) {
       max = Math.min(max, 50); 
       min = Math.min(min, 40);
@@ -111,8 +110,6 @@ Document.getElementById("lifestyleForm").addEventListener("submit", function(e) 
 
   const today = new Date();
   
-  // If the calculated death date is in the past, it means their lifestyle is so bad 
-  // they statistically shouldn't be alive.
   let deathMessage = (deathDate < today) 
     ? "💀 You are living on borrowed time. (Statistically Deceased)" 
     : "💀 " + deathDate.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
