@@ -9,37 +9,45 @@
 <body>
 
   <div class="container">
-    <h1>🧬 Lifestyle & Life Predictor</h1>
-    <p class="tag">My Nega Answer Honestly 🗿</p>
+    <h1>🧬 Lifestyle & Fate Predictor</h1>
+    <p class="tag">Answer Honestly... Your Timeline Depends on It 🗿</p>
 
     <form id="lifestyleForm">
 
-      <label>Date of Birth</label>
-      <input type="date" id="dob" required>
+      <div class="form-group">
+        <label>Date of Birth</label>
+        <input type="date" id="dob" required>
+      </div>
 
-      <label>Gender</label>
-      <select id="gender">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
-      </select>
+      <div class="row">
+        <div class="col">
+          <label>Gender</label>
+          <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="col">
+           <label>Height (cm)</label>
+           <input type="number" id="height" min="50" max="250" placeholder="170" required>
+        </div>
+        <div class="col">
+           <label>Weight (kg)</label>
+           <input type="number" id="weight" min="20" max="300" placeholder="70" required>
+        </div>
+      </div>
 
-      <label>Height (in cm)</label>
-      <input type="number" id="height" min="50" max="250" placeholder="e.g., 170" required>
-
-      <label>Weight (in kg)</label>
-      <input type="number" id="weight" min="20" max="300" placeholder="e.g., 70" required>
-
-      <label>Food Habit</label>
+      <label>Food Habit 🍔</label>
       <select id="food">
-        <option value="5">Very Healthy</option>
+        <option value="5">Very Healthy (Home cooked)</option>
         <option value="4">Healthy</option>
         <option value="3">Moderate</option>
         <option value="2">Junk Heavy</option>
         <option value="1">Very Poor</option>
       </select>
 
-      <label>Physical Activity💪</label>
+      <label>Physical Activity 💪</label>
       <select id="activity">
         <option value="5">Daily Workout</option>
         <option value="4">4–5 days/week</option>
@@ -48,99 +56,82 @@
         <option value="1">Almost None</option>
       </select>
 
-      <label>Gooning 💦 </label>
+      <label>Gooning / Self-Control 💦</label>
       <select id="fap">
-        <option value="5">Rare / Never</option>
+        <option value="5">Rare / Never (Monk Mode)</option>
         <option value="4">Once a week</option>
         <option value="3">2–3 times a week</option>
         <option value="2">Once daily</option>
         <option value="1">4+ times daily 💀</option>
       </select>
 
-      <label>Stress Level💥</label>
+      <label>Sleep Quality 💤</label>
+      <select id="sleep">
+        <option value="5">7–9 hrs (Optimal)</option>
+        <option value="4">6–7 hrs</option>
+        <option value="3">5–6 hrs</option>
+        <option value="2">4–5 hrs</option>
+        <option value="1">Below 4 hrs (Zombie)</option>
+      </select>
+
+      <label>Mental State 🧠</label>
+      <select id="mental">
+        <option value="5">Excellent (Stoic)</option>
+        <option value="4">Good</option>
+        <option value="3">Moderate (Anxious)</option>
+        <option value="2">Poor (Depressed)</option>
+        <option value="1">Severe (Down Bad)</option>
+      </select>
+
+      <div class="row">
+        <div class="col">
+           <label>Smoking 🚭</label>
+           <select id="smoking">
+             <option value="5">Never</option>
+             <option value="3">Occasional</option>
+             <option value="1">Chain Smoker</option>
+           </select>
+        </div>
+        <div class="col">
+           <label>Alcohol 🍺</label>
+           <select id="alcohol">
+             <option value="5">Never</option>
+             <option value="3">Occasional</option>
+             <option value="1">Regular</option>
+           </select>
+        </div>
+      </div>
+
+      <label>Stress Level 💥</label>
       <select id="stress">
-        <option value="5">Very Low</option>
-        <option value="4">Low</option>
-        <option value="3">Moderate</option>
-        <option value="2">High</option>
+        <option value="5">Low (Chill)</option>
+        <option value="4">Moderate</option>
+        <option value="3">High</option>
+        <option value="2">Very High</option>
         <option value="1">Extreme</option>
       </select>
 
-      <label>Sleep Quality💤</label>
-      <select id="sleep">
-        <option value="5">7–9 hrs</option>
-        <option value="4">6–7 hrs</option>
-        <option value="4">9–10 hrs</option>
-        <option value="3">5–6 hrs</option>
-        <option value="3">10–11 hrs</option>
-        <option value="2">4–5 hrs</option>
-        <option value="2">11–13 hrs</option>
-        <option value="1">Below 4 hrs</option>
-        <option value="1">13+ hrs</option>
-      </select>
-
-      <label>Manshik Santulan🧠</label>
-      <select id="mental">
-        <option value="5">Excellent (No issues)</option>
-        <option value="4">Good (Occasional blues)</option>
-        <option value="3">Moderate (Manageable anxiety/depression)</option>
-        <option value="2">Poor (Frequent issues)</option>
-        <option value="1">Severe (Needs help 💀)</option>
-      </select>
-
-      <label>Chronic Illness😷</label>
-      <select id="illness">
-        <option value="5">None</option>
-        <option value="3">Mild</option>
-        <option value="1">Severe</option>
-      </select>
-
-      <label>Smoking🚭</label>
-      <select id="smoking">
-        <option value="5">Never</option>
-        <option value="3">Occasionally</option>
-        <option value="1">Regular</option>
-      </select>
-
-      <label>Drinking🍺</label>
-      <select id="alcohol">
-        <option value="5">Never</option>
-        <option value="3">Occasionally</option>
-        <option value="1">Regular</option>
-      </select>
-
-      <label>Nasha patti💊</label>
-      <select id="drugs">
-        <option value="5">None</option>
-        <option value="3">Mild</option>
-        <option value="1">Severe</option>
-      </select>
-
-      <label>Daily Water Intake💧</label>
-      <select id="water">
-        <option value="5">3+ liters</option>
-        <option value="4">2–3 liters</option>
-        <option value="3">1–2 liters</option>
-        <option value="2">0.5–1 liter</option>
-        <option value="1">Below 0.5 liter</option>
-      </select>
-
-      <label>Daily Screen Time📱</label>
+      <label>Daily Screen Time 📱</label>
       <select id="screen">
         <option value="5">Below 3 hrs</option>
         <option value="4">3–5 hrs</option>
         <option value="3">5–7 hrs</option>
         <option value="2">7–10 hrs</option>
-        <option value="1">10+ hrs</option>
+        <option value="1">10+ hrs (Brain rot)</option>
       </select>
 
-      <button type="submit">Analyze My Fate ☠️</button>
+      <input type="hidden" id="illness" value="5">
+      <input type="hidden" id="drugs" value="5">
+      <input type="hidden" id="water" value="3">
+
+      <button type="submit" id="analyzeBtn">Analyze My Fate ☠️</button>
 
     </form>
 
+    <div id="loading" class="loading" style="display:none;">🔮 Consulting the Elders...</div>
     <div id="result" class="result"></div>
   </div>
 
   <script src="script.js"></script>
 </body>
-</html
+</html>
