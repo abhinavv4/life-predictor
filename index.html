@@ -25,7 +25,6 @@
           <select id="gender">
             <option value="male">Male</option>
             <option value="female">Female</option>
-            <option value="other">Other</option>
           </select>
         </div>
         <div class="col">
@@ -37,6 +36,31 @@
            <input type="number" id="weight" min="20" max="300" placeholder="70" required>
         </div>
       </div>
+
+      <label>Chronic Illness (HIV, Cancer, Heart, etc.) 😷</label>
+      <select id="illness">
+        <option value="5">None (Healthy)</option>
+        <option value="2">Mild (Manageable condition)</option>
+        <option value="0">Severe (Critical/Terminal) 💀</option>
+      </select>
+
+      <label>Daily Water Intake 💧</label>
+      <select id="water">
+        <option value="5">3+ Liters (Hydrated King)</option>
+        <option value="4">2–3 Liters</option>
+        <option value="2">1–2 Liters</option>
+        <option value="1">Below 1 Liter (Dehydrated)</option>
+      </select>
+
+      <label>Sleep Duration 💤</label>
+      <select id="sleep">
+        <option value="5">7–9 hrs (Optimal)</option>
+        <option value="4">6–7 hrs</option>
+        <option value="3">10–13 hrs (Oversleeping)</option>
+        <option value="2">4–6 hrs</option>
+        <option value="1">14+ hrs (Hypersomnia/Illness)</option>
+        <option value="1">Below 4 hrs (Zombie)</option>
+      </select>
 
       <label>Food Habit 🍔</label>
       <select id="food">
@@ -56,22 +80,13 @@
         <option value="1">Almost None</option>
       </select>
 
-      <label>Gooning / Self-Control 💦</label>
+      <label>Self-Control (Gooning) 💦</label>
       <select id="fap">
         <option value="5">Rare / Never (Monk Mode)</option>
         <option value="4">Once a week</option>
         <option value="3">2–3 times a week</option>
         <option value="2">Once daily</option>
         <option value="1">4+ times daily 💀</option>
-      </select>
-
-      <label>Sleep Quality 💤</label>
-      <select id="sleep">
-        <option value="5">7–9 hrs (Optimal)</option>
-        <option value="4">6–7 hrs</option>
-        <option value="3">5–6 hrs</option>
-        <option value="2">4–5 hrs</option>
-        <option value="1">Below 4 hrs (Zombie)</option>
       </select>
 
       <label>Mental State 🧠</label>
@@ -89,7 +104,7 @@
            <select id="smoking">
              <option value="5">Never</option>
              <option value="3">Occasional</option>
-             <option value="1">Chain Smoker</option>
+             <option value="1">Regular/Chain</option>
            </select>
         </div>
         <div class="col">
@@ -120,15 +135,11 @@
         <option value="1">10+ hrs (Brain rot)</option>
       </select>
 
-      <input type="hidden" id="illness" value="5">
-      <input type="hidden" id="drugs" value="5">
-      <input type="hidden" id="water" value="3">
-
       <button type="submit" id="analyzeBtn">Analyze My Fate ☠️</button>
 
     </form>
 
-    <div id="loading" class="loading" style="display:none;">🔮 Consulting the Elders...</div>
+    <div id="loading" class="loading" style="display:none;">🔮 Calculating Timeline...</div>
     <div id="result" class="result"></div>
   </div>
 
