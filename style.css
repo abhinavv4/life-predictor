@@ -22,7 +22,11 @@ h1 {
   text-align: center;
   margin-bottom: 5px;
   background: -webkit-linear-gradient(#00c6ff, #0072ff);
-  -webkit-background-clip: text;
+  -webkit-background-clip: text;  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title {
   -webkit-text-fill-color: transparent;
 }
 
